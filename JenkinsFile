@@ -1,0 +1,43 @@
+pipeline {
+    agent any
+
+    environment {
+        SONARQUBE = credentials('sonarqube-token') // You’ll create this credential in Jenkins
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git branch: 'main', url: 'https://github.com/IamBilalAhmad/jenkins-pipeline-demo.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm install'
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                withSonarQubeEnv('MySonarQube') {
+                    sh """
+                      sonar-scanner \
+                      -Dsonar.projectKey=jenkins-pipeline-demo \
+                      -Dsonar.sources=. \
+                      -Dsonar.host.url=http://localhost:9000 \
+                      -Dsonar.login=$SONARQUBE
+                    """
+                }
+            }
+        }
+
+        stage('Docker Build') {
+            steps {
+                script {
+                    docker.build("jenkins-pipeline-demo")
+                }
+            }
+        }
+    }
+}
