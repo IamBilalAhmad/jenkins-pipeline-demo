@@ -53,3 +53,5 @@ npm install (build step) ✅
 Run SonarQube scanner ✅
 
 Build Docker image ✅
+
+Pipeline completed.
