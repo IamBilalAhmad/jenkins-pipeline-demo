@@ -6,9 +6,11 @@ pipeline {
     }
 
     stages {
+        
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/IamBilalAhmad/jenkins-pipeline-demo.git'
+                git branch: 'main', url: 'https://github.com/IamBilalAhmad/jenkins-pipeline-demo.git',
+            credentialsId: 'github-credentials'
             }
         }
 
