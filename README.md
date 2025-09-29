@@ -26,4 +26,30 @@ After getting the password from here and pasting in the jenkins dashboard, insta
 
 Run sonarqube as docker container
 docker run -d --name sonarqube -p 9000:9000 sonarqube:lts-community
-Open http://localhost:9000
+
+
+Login http://localhost:9000 → create a project sample-devops-project
+
+Generate a token (e.g. sonar-token)
+
+In Jenkins:
+
+Go to Manage Jenkins → Credentials → Global
+
+Add sonarqube-token as a Secret Text credential
+
+Step 6: Run the Pipeline
+
+Commit and push all files (app.js, package.json, Dockerfile, Jenkinsfile).
+
+In Jenkins → Create a new Pipeline job → point it to your repo.
+
+Run build → pipeline will:
+
+Checkout ✅
+
+npm install (build step) ✅
+
+Run SonarQube scanner ✅
+
+Build Docker image ✅
