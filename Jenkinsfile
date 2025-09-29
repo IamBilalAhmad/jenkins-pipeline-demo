@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        GITHUB_CREDENTIALS = 'jenkins-pipeline'
         SONARQUBE_ENV = 'MySonarQube' // replace with your SonarQube server name in Jenkins
     }
 
@@ -10,7 +9,6 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: 'main',
-                    credentialsId: "${GITHUB_CREDENTIALS}",
                     url: 'https://github.com/IamBilalAhmad/jenkins-pipeline-demo.git'
             }
         }
