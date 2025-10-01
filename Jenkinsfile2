@@ -14,17 +14,15 @@ pipeline {
         }
 
         stage('SonarQube Analysis') {
-            stage('SonarQube Analysis') {
-                steps {
-                    withSonarQubeEnv('MySonarQube') {
-                        sh """
-                            sonar-scanner \
-                            -Dsonar.projectKey=jenkins-pipeline-demo \
-                            -Dsonar.sources=. \
-                            -Dsonar.host.url=$SONAR_HOST_URL \
-                            -Dsonar.login=$SONAR_AUTH_TOKEN
-                        """
-                    }
+            steps {
+                withSonarQubeEnv('MySonarQube') {
+                    sh """
+                        sonar-scanner \
+                        -Dsonar.projectKey=jenkins-pipeline-demo \
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=$SONAR_HOST_URL \
+                        -Dsonar.login=$SONAR_AUTH_TOKEN
+                    """
                 }
             }
         }
