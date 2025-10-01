@@ -18,7 +18,7 @@ pipeline {
                 withSonarQubeEnv("${SONARQUBE_ENV}") {
                     script {
                         // 'MySonarScanner' should match the SonarQube Scanner name in Jenkins Global Tool Configuration
-                        def scannerHome = tool 'MySonarScanner'
+                        def scannerHome = tool 'SonarScanner'
                         sh """
                             ${scannerHome}/bin/sonar-scanner \
                             -Dsonar.projectKey=vprofile \
